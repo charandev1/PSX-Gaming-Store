@@ -1,0 +1,48 @@
+.heading {
+  display: flex;
+  position: relative;
+  padding: 0.15em;
+  color: #9a9797;
+  font-size: 1.5rem;
+  font-weight: 1000;
+  justify-content: center;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* 4 items per row on desktop */
+.product-container {
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* image fix */
+.product-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* text alignment */
+.product-container span {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* mobile view */
+@media screen and (max-width: 750px) {
+  .product-container {
+    width: 50%;
+  }
+}
+
+/* ensures page scroll works */
+body {
+  overflow-y: auto;
+}

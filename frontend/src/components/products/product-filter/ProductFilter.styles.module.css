@@ -1,0 +1,128 @@
+.filters-open-button,
+.filters-close-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.filters-open-button {
+  background-color: var(--clr-cta);
+  font-weight: 500;
+  padding: 0.5rem;
+  padding-inline: 2rem;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  font-size: 1.25rem;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  border: 2px solid #878787;
+  color: var(--clr-text-neutral);
+  transition: all 0.3s;
+}
+
+.filters-open-button:hover {
+  background-color: var(--clr-text-neutral);
+  color: var(--clr-cta);
+}
+
+.filter-header p {
+  font-size: 1.25rem;
+}
+
+.filter-header button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter-header button:hover {
+  color: var(--clr-cta);
+}
+
+.product-filters-container {
+  background-color: var(--clr-neutral);
+  display: none;
+}
+
+.product-filters-container div {
+  padding: 1rem;
+}
+
+.product-filters-container div:first-child {
+  padding-bottom: 0;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  border-radius: inherit;
+}
+
+.product-filter {
+  border-bottom: 3px solid rgba(128, 128, 128, 0.2);
+}
+
+.product-filter:last-child {
+  border-bottom: none;
+}
+
+.filter-heading {
+  margin-bottom: 0.75rem;
+}
+
+@media screen and (min-width: 910px) {
+  .product-filters-container {
+    display: block;
+    border-radius: 0.85rem;
+    max-width: 18rem;
+  }
+
+  .filters-open-button,
+  .filters-close-button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .product-filters-container.open {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    overflow-y: scroll;
+    left: 0;
+    z-index: calc(var(--z-nav) + 1);
+    max-width: 70%;
+    font-size: 1rem;
+    overscroll-behavior: none;
+    top: 0;
+    scrollbar-width: thin;
+    animation: asd 1s forwards;
+  }
+
+  @keyframes asd {
+    from {
+      transform: translateX(-400px);
+    }
+    to {
+      transform: translateX(0px);
+    }
+  }
+
+  .product-filters-container::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .product-filters-container div {
+    padding: 0.5rem;
+  }
+}
+
+.price-range {
+  display: block;
+  max-width: 100%;
+}

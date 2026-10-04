@@ -1,0 +1,39 @@
+.footer {
+  background-image: var(--clr-linear-gradient);
+  color: var(--clr-text-neutral);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-side-heading {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.footer-nav,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-contact-icons {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: space-around;
+  font-size: 1.5rem;
+}
+
+.footer-note {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.footer-logo-x-mark::after,
+.footer-logo-x-mark::before {
+  left: 13% !important;
+}

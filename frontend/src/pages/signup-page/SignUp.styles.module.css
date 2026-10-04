@@ -1,0 +1,45 @@
+.signUpWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 100vh;
+}
+
+.signUpContainer {
+  background-color: var(--clr-neutral);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: min(450px, 90vw);
+}
+
+.signUpContainer form input {
+  width: 100%;
+}
+
+.signUpBtn {
+  width: 100%;
+  background: transparent;
+  background-image: var(--clr-linear-gradient);
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  color: var(--clr-text-neutral);
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.signUpBtn.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.invalidValueNote {
+  color: var(--error);
+  display: flex;
+}
+
+.terms {
+  margin-top: 1rem;
+}

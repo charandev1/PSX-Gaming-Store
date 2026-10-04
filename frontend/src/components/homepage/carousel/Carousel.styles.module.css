@@ -1,0 +1,164 @@
+.carouselContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.slideshowContainer {
+  display: flex;
+  max-width: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  transition: 2s;
+}
+
+.slideImg {
+  width: 100%;
+  display: block;
+}
+
+.actionItem {
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  transition: 2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 1084px) {
+  .actionItem {
+    right: 0;
+    left: 0;
+    animation: slideInTop 2s;
+  }
+}
+
+@media screen and (min-width: 1084px) {
+  .actionItem {
+    top: 40%;
+    margin: auto 0;
+  }
+
+  .actionItem.actionItemPosRight {
+    animation: slideInLeft 2s;
+    right: 10%;
+  }
+
+  .actionItem.actionItemPosLeft {
+    animation: slideInRight 2s;
+    left: 10%;
+  }
+}
+
+.actionLink {
+  display: block;
+  padding: 0.5rem;
+  color: #fff;
+  width: fit-content;
+  background-color: var(--clr-cta);
+  border-radius: 0.2em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.sliderTabGroup {
+  position: absolute;
+  top: 90%;
+  left: 0;
+  right: 0;
+  padding: 0.25rem;
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+}
+
+.dot {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: hsla(0, 0%, 100%, 0.25);
+  border: 0.01rem solid black;
+  position: relative;
+  overflow: hidden;
+  transition: 0.7s;
+}
+
+.dot:hover {
+  background-color: hsla(349, 100%, 85%, 0.5);
+}
+
+.dot::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: scale(0);
+  box-shadow: inset 15px 15px var(--clr-cta);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dot:checked::before {
+  transform: scale(1);
+}

@@ -1,0 +1,357 @@
+.checkoutContainer {
+  min-height: calc(100vh - 70px);
+
+  padding: 100px 3rem 40px;
+
+  background-color: rgba(21, 22, 21, 0.975);
+
+  color: white;
+
+  box-sizing: border-box;
+}
+
+.checkoutTitle {
+  max-width: 1000px;
+
+  margin: 0 auto 20px;
+
+  font-size: 1.8rem;
+}
+
+
+/* SECTIONS */
+
+.section {
+  max-width: 1000px;
+
+  margin: 0 auto 20px;
+
+  padding: 20px;
+
+  background-color: #151615;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+}
+
+.section h2,
+.priceContainer h2 {
+  margin: 0 0 15px;
+
+  font-size: 1rem;
+
+  text-transform: uppercase;
+}
+
+
+/* ADDRESS */
+
+.sectionHeader {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding-bottom: 12px;
+
+  margin-bottom: 12px;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+}
+
+.changeButton {
+  border: none;
+
+  background: transparent;
+
+  color: #0bee1e;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.address {
+  color: rgba(255, 255, 255, 0.75);
+
+  line-height: 1.6;
+}
+
+.addressName {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: white;
+
+  font-weight: 600;
+}
+
+.addressName span {
+  padding: 3px 8px;
+
+  border-radius: 10px;
+
+  background-color: rgba(2, 195, 76, 0.15);
+
+  color: #0bee1e;
+
+  font-size: 11px;
+}
+
+.noAddress {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.selectButton {
+  padding: 8px 14px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background-color: #02c34c;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* PRODUCTS */
+
+.products {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+
+.product img {
+  width: 60px;
+
+  height: 70px;
+
+  object-fit: cover;
+
+  border-radius: 5px;
+}
+
+.productInfo h3 {
+  margin: 0 0 5px;
+
+  font-size: 0.95rem;
+}
+
+.productInfo p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+/* PRICE */
+
+.priceContainer {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 20px;
+
+  background-color: #151615;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+}
+
+.priceRow,
+.totalRow {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 9px 0;
+
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.discount,
+.free {
+  color: #388e3c;
+
+  font-weight: 500;
+}
+
+.totalRow {
+  margin-top: 8px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  font-weight: 600;
+}
+
+
+/* PAY */
+
+.payButton {
+  width: 100%;
+
+  height: 44px;
+
+  margin-top: 18px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background-color: #02c34c;
+
+  color: white;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.payButton:hover {
+  background-color: #0bee1e;
+
+  color: #111;
+}
+
+.payButton:disabled {
+  background-color: #444;
+
+  color: #888;
+
+  cursor: not-allowed;
+}
+
+.addressWarning {
+  margin: 10px 0 0;
+
+  text-align: center;
+
+  color: #ffb347;
+
+  font-size: 0.85rem;
+}
+
+
+/* EMPTY */
+
+.emptyCheckout {
+  min-height: 100vh;
+
+  padding-top: 150px;
+
+  text-align: center;
+
+  background-color: rgba(21, 22, 21, 0.975);
+
+  color: white;
+}
+
+.shopButton {
+  padding: 10px 18px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background-color: #02c34c;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* LOADING */
+
+.loading {
+  min-height: 100vh;
+
+  padding-top: 120px;
+
+  text-align: center;
+
+  background-color: rgba(21, 22, 21, 0.975);
+
+  color: white;
+}
+.product {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.removeProductButton {
+  margin-left: auto;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+
+  background-color: transparent;
+
+  color: #ff4d5a;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.removeProductButton:hover {
+  background-color: rgba(255, 77, 90, 0.1);
+
+  border-color: rgba(255, 77, 90, 0.4);
+
+  transform: scale(1.08);
+}

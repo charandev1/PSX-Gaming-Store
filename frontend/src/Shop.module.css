@@ -1,0 +1,48 @@
+.imagestyle {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageWrapper:hover .imagestyle {
+  transform: scale(1.08);
+}
+
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.imageWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageWrapper:hover::after {
+  background: rgba(255, 255, 255, 0.35);
+}
+.infoLink{
+  text-decoration: none;
+  color: inherit; /* 🔥 key line */
+}
+
+.infoLink:visited{
+  color: inherit;
+}
+
+.infoLink:hover {
+  color: inherit;
+}
+.shopLayout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Filter sidebar */

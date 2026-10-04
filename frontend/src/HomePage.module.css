@@ -1,0 +1,438 @@
+.main {
+  background-color: rgba(21, 22, 21, 0.975);
+  height: 70px;
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* NAVBAR CONTENT */
+.navbar {
+  height: 100%;
+  display: flex;
+  justify-content: space-between; /* 🔥 pushes right side */
+  align-items: center;
+  padding: 0 25px;
+}
+.logoLink {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  flex-shrink: 0;
+}
+
+.logoImage {
+   width: 135px;
+  height: 60px;
+  object-fit: contain;
+
+  display: block;
+
+  transition: transform 0.2s ease;
+}
+
+.logoLink:hover .logoImage {
+  transform: scale(1.04);
+}
+
+/* LEFT GROUP */
+.leftNav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* RIGHT GROUP */
+.rightNav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* ===== PSX LOGO ===== */
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  font-size: 2.2rem;        /* ⬆ increase font size */
+  letter-spacing: 2px;
+}
+
+.logoText {
+  font-family: 'Edu SA Hand', cursive;
+  color: #0bee1e;
+}
+
+/* hover glow */
+.logoContainer:hover .logoText {
+  text-shadow:
+    0 0 5px #06c0dc,
+    0 0 15px #80f4ad;
+}
+
+/* X LOGO */
+
+.logoX {
+  position: relative;
+  width: 26px;             /* ⬆ slightly bigger */
+  height: 26px;
+  margin-left: 4px;
+}
+
+.logoX::before,
+.logoX::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: #0bee1e;
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.logoX::before {
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.logoX::after {
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* X glow */
+.logoContainer:hover .logoX::before,
+.logoContainer:hover .logoX::after {
+  box-shadow:
+    0 0 5px #06c0dc,
+    0 0 15px #80f4ad;
+}
+.searchBar {
+  position: relative;
+  width: 460px;          /* container controls size */
+  display: flex;
+  align-items: center;
+}
+
+/* input fills container */
+.searchBar input {
+  width: 100%;
+  height: 36px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 0 50px 0 15px;  /* room for icon */
+  font-size: 0.9rem;
+  background-color: #f2eadf;
+}
+
+/* icon */
+.searchIcon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.7;
+}
+
+.searchButton:hover .searchIcon {
+  opacity: 1;
+}
+
+.searchBar input::placeholder {
+  color: #999;
+}
+
+/* optional hover style */
+.searchBar input:focus {
+  box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.6);
+  background-color: #f6f2ed;
+}
+.searchIcon:hover {
+  opacity: 1;
+}
+.searchButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  height: 36px;
+  width: 45px;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+.shop {           /* not 400px */
+  align-items: center;
+  justify-content: center;
+}
+
+.shop:hover {
+  /* background-color: rgb(212, 212, 219); */
+  color: #0bee1e;
+}
+.signin {
+  align-items: center;
+  justify-content: center;
+}
+
+.signin:hover {
+  /* background-color: rgb(212, 212, 219); */
+  color: #0bee1e;
+}
+
+.shop,
+.signin,
+.elementBox {
+  height: 70px;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    gap: 8px; 
+  cursor: pointer;
+  border-radius: 6px;
+
+  font-weight: 700;
+  font-family: sans-serif;
+
+  transition: background-color 0.25s ease;
+}
+
+.shop:hover,
+.signin:hover,
+.elementBox:hover {
+  color: #e4ede5;
+  text-decoration: none;
+  border-bottom: 3px solid #02c34c;
+}
+
+.wishlistLink,
+.cartLink {
+  text-decoration: none;
+  color: inherit; /* 🔥 key line */
+}
+
+.wishlistLink:visited,
+.cartLink:visited {
+  color: inherit;
+}
+
+.wishlistLink:hover,
+.cartLink:hover {
+  color: inherit;
+}
+
+.heartIcon,
+.icon {
+  font-size: 1.5rem;
+}
+.shop,
+.signin,
+.elementBox{
+  color:  rgb(232, 226, 227);
+}
+.wishlistIconWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.wishlistBadge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartIconWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ============================= */
+/* USER DROPDOWN */
+/* ============================= */
+
+.sign-in-component {
+  position: relative;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: rgb(232, 226, 227);
+}
+
+/* Username + user icon + arrow */
+.user-wrapper {
+  height: 70px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 700;
+  font-family: sans-serif;
+
+  transition: color 0.25s ease;
+}
+
+/* Name + user icon */
+.username {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* User icon */
+.user-icon {
+  font-size: 15px;
+}
+
+/* Arrow */
+.drop-down-arrow {
+  transition: transform 0.25s ease;
+}
+
+/* Rotate arrow when dropdown opens */
+.drop-down-arrow.transform {
+  transform: rotate(180deg);
+}
+
+/* Green underline / hover effect */
+.sign-in-component:hover .user-wrapper {
+  color: #e4ede5;
+}
+
+.sign-in-component:hover {
+  border-bottom: 3px solid #02c34c;
+}
+
+
+/* ============================= */
+/* DROPDOWN MENU */
+/* ============================= */
+
+.drop-down-menu {
+  position: absolute;
+
+  top: 70px;
+  right: 0;
+
+  min-width: 170px;
+
+  background-color: rgba(21, 22, 21, 0.98);
+
+  border-radius: 0 0 6px 6px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+
+  padding: 15px 0;
+
+  z-index: 1100;
+}
+
+
+/* Remove default ul styling */
+.drop-down-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 15px;
+}
+
+
+/* Each menu item */
+.drop-down-menu li {
+  width: 100%;
+}
+
+
+/* Orders / Addresses / Signout */
+.drop-down-menu-item {
+  width: 100%;
+
+  min-height: 40px;
+
+  padding: 8px 12px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  color: rgb(232, 226, 227);
+
+  background: transparent;
+
+  border: none;
+
+  text-decoration: none;
+
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* Dropdown item hover */
+.drop-down-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #0bee1e;
+  text-decoration: none;
+}
+
+
+/* Signout button */
+.logout-button {
+  font-family: sans-serif;
+}

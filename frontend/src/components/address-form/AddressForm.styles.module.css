@@ -1,0 +1,58 @@
+.address-form-wrapper {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-modal));
+  display: flex;
+  align-items: center;
+}
+
+.address-form {
+  position: absolute;
+  background-color: var(--clr-neutral);
+  border-radius: 0.5rem;
+  width: max(17.5rem, 60%);
+  padding: 1rem;
+  border: none;
+  margin: auto;
+}
+
+.address-form input {
+  display: block;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.address-type {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.address-type-input {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.close-button {
+  display: block;
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.save-button {
+  display: block;
+  margin: auto;
+  background: transparent;
+  border-radius: 0.25rem;
+  color: var(--clr-cta);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}

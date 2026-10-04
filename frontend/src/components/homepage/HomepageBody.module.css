@@ -1,0 +1,125 @@
+:root {
+  --inset-bottom-cta-decoration-img: 85px;
+}
+
+.heading {
+  display: inline-block;
+  position: relative;
+  padding: 0.15em;
+  color: var(--clr-black-accent);
+  font-size: 1.5rem;
+  font-weight: 1000;
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--clr-cta);
+}
+
+.deal-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.deal-timer * {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+.deal-timer:last-child {
+  font-size: 5rem;
+  color: red;
+}
+
+.products {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.product-container {
+  width: 25%;
+}
+
+.product-container span {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (max-width: 750px) {
+  .product-container {
+    width: 50%;
+  }
+}
+
+.cta-email-subscription {
+  background-image: var(--clr-linear-gradient);
+  position: relative;
+  margin-block: 8rem;
+}
+
+@media screen and (max-width: 925px) {
+  .cta-email-subscription {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.cta-text-content {
+  color: var(--clr-text-neutral);
+  text-align: left;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  padding-inline: 1rem;
+}
+
+.form {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form input {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  background-color: var(--clr-bg-100);
+  padding-inline: 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.subscribe-button {
+  color: inherit;
+  background-color: var(--clr-cta);
+  padding-inline: 0.5rem;
+  padding-block: 0.5rem;
+  cursor: pointer;
+  border: none;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.email-subscription-decoration-img {
+  width: 250px;
+  transform: translateY(-20%);
+}
+
+@media screen and (min-width: 925px) {
+  .email-subscription-decoration-img {
+    position: absolute;
+    clip-path: inset(0 0 var(--inset-bottom-cta-decoration-img));
+    bottom: 0;
+    transform: translateY(var(--inset-bottom-cta-decoration-img));
+    right: 15%;
+  }
+  .cta-text-content {
+    padding-inline: 5rem 3rem;
+    padding-block: 3rem;
+  }
+}

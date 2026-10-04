@@ -1,0 +1,11 @@
+<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="260" height="80" rx="40" fill="#020617"></rect>
+
+  <text x="60" y="52" font-size="38" font-weight="700" fill="#e5e7eb" font-family="Segoe UI, Arial, sans-serif">
+    PSX
+  </text>
+
+  <text x="115" y="52" font-size="14" fill="#94a3b8" font-family="Segoe UI">
+    GAMING STORE
+  </text>
+</svg>

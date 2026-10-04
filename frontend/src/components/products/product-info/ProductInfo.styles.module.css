@@ -1,0 +1,50 @@
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.discount-price {
+  font-weight: 500;
+  font-size: 1.7rem;
+}
+
+.old-price {
+  font-size: 1.25rem;
+  opacity: 0.75;
+}
+
+.discount-percent {
+  font-size: 1.25rem;
+  color: var(--clr-cta);
+  font-weight: 500;
+}
+
+.add-to-cart-button {
+  background-color: var(--clr-cta);
+  color: var(--clr-text-neutral);
+  border: none;
+  border-radius: 0.5rem;
+  padding-inline: 1.25rem;
+  cursor: pointer;
+}
+
+.wishlist-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.wishlist-button-wrapper {
+  border: 1px solid;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.action-items {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  justify-content: center;
+}

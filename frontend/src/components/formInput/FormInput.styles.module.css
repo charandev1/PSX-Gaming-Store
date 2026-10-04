@@ -1,0 +1,34 @@
+.group {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.formInput {
+  border: 0;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.formInput:focus {
+  outline: none;
+}
+
+.formInput:focus ~ .formInputLabel {
+  top: -14px;
+  font-size: 12px;
+  color: black;
+}
+
+.formInputLabel {
+  color: grey;
+  position: absolute;
+  pointer-events: none;
+  transition: 300ms ease all;
+  left: 0.5rem;
+}
+
+.formInputLabel.shrink {
+  top: -14px;
+  font-size: 12px;
+  color: black;
+}

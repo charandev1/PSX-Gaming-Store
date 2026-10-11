@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cartlist")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://psx-gaming-store.netlify.app"
+})
 public class CartController {
 
     private final CartRepo repo;

@@ -9,7 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/order-items")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://psx-gaming-store.netlify.app"
+})
 public class OrderItemController {
 
     @Autowired

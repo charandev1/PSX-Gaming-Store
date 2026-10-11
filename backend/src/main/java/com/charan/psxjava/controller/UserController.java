@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173") // React Vite
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://psx-gaming-store.netlify.app"
+})
 public class UserController {
 
     @Autowired

@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payment")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://psx-gaming-store.netlify.app"
+})
 public class PaymentController {
 
     @Autowired

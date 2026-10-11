@@ -9,6 +9,10 @@ import com.charan.psxjava.dto.FilterRequest;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://psx-gaming-store.netlify.app"
+})
 public class ProductController {
 
     private final ProductRepo repo;

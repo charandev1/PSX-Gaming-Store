@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import styles from './Shop.module.css';
 import api from "./api";
@@ -36,13 +36,14 @@ const navigate = useNavigate();
   //       console.error("❌ API ERROR:", err);
   //     });
   // }, []);
- useEffect(() => {
+ 
+useEffect(() => {
 
   // SEARCH
   if (searchQuery) {
 
-    axios
-      .get("http://localhost:8080/products/search", {
+    api
+      .get("/products/search", {
         params: { query: searchQuery }
       })
       .then(res => {
@@ -58,8 +59,8 @@ const navigate = useNavigate();
   // CATEGORY / ALL PRODUCTS
   else {
 
-    axios
-      .get("http://localhost:8080/products", {
+    api
+      .get("/products", {
         params: category ? { category } : {}
       })
       .then(res => {
@@ -75,8 +76,8 @@ const navigate = useNavigate();
   // WISHLIST
   if (userInfo) {
 
-    axios
-      .get("http://localhost:8080/wishlist", {
+    api
+      .get("/wishlist", {
         params: { userId: userInfo.id }
       })
       .then(res => {
@@ -90,6 +91,7 @@ const navigate = useNavigate();
   }
 
 }, [category, userInfo, searchQuery]);
+
 
 // const getWishlistFromStorage = (): number[] => {
 //   return JSON.parse(localStorage.getItem("wishlist") || "[]");

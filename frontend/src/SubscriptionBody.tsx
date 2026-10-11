@@ -1,6 +1,6 @@
 import { showToastSuccessMessage } from './toastMessage';
 import styles from './SubscriptionBody.module.css';
-import { toast } from "react-toastify";
+
 const SubscriptionBody = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

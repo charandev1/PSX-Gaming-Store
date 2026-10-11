@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./FilterBody.module.css";
-import axios from "axios";
+import api from "./api";
 
 const USER_ID = 1;
 
@@ -35,20 +35,20 @@ const ProductFilter = ({ setProducts }: ProductFilterProps) => {
   };
 
   const sendFiltersToBackend = async (updatedFilters: any) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/products/filter",
-        {
-          userId: USER_ID,
-          ...updatedFilters,
-        }
-      );
+  try {
+    const response = await api.post(
+      "/products/filter",
+      {
+        userId: USER_ID,
+        ...updatedFilters,
+      }
+    );
 
-      setProducts(response.data);
-    } catch (err) {
-      console.error("Filter error:", err);
-    }
-  };
+    setProducts(response.data);
+  } catch (err) {
+    console.error("Filter error:", err);
+  }
+};
 
   // Brand checkbox
   const handleBrandChange = (brand: string) => {

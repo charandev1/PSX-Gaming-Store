@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import axios from 'axios';
+import api from "../api";
 import { useNavigate } from 'react-router-dom';
 import type ProviderPropsType from '../types/ProviderPropsType';
 import { handleError } from '../utils/displayError';
@@ -31,7 +31,7 @@ export type UserContextValueType = {
 const UserContext = createContext<UserContextValueType>(undefined);
 
 export const UserProvider = ({ children }: ProviderPropsType) => {
-  const { useAxiosPrivate, clearPersist, signedIn, accessToken, setSignedIn, setAccessToken, clearAxiosInterceptors } =
+  const { useAxiosPrivate, clearPersist, setSignedIn, setAccessToken, clearAxiosInterceptors } =
     useAuthContext();
  const [userInfo, setUserInfo] =
   useState<UserInfoType | null>(() => {
@@ -58,14 +58,15 @@ export const UserProvider = ({ children }: ProviderPropsType) => {
     };
   }, [clearAxiosInterceptors, requestInterceptor, responseInterceptor]);
 
- const userSignInHandler = async (email: string, password: string) => {
+ 
+const userSignInHandler = async (email: string, password: string) => {
   setLoading(true);
 
   try {
-    const { data } = await axios.post(
-      "http://localhost:8080/user/auth",
-      { email, password }
-    );
+    const { data } = await api.post("/user/auth", {
+      email,
+      password,
+    });
 
     setSignedIn(true);
     setUserInfo(data);
@@ -73,9 +74,7 @@ export const UserProvider = ({ children }: ProviderPropsType) => {
     localStorage.setItem("user", JSON.stringify(data));
 
     showToastSuccessMessage("Login successful");
-
     navigate("/");
-
   } catch (error: any) {
     console.error(error);
 
@@ -83,18 +82,16 @@ export const UserProvider = ({ children }: ProviderPropsType) => {
 
     if (message === "User not found") {
       showToastErrorMessage("User not registered");
-    } 
-    else if (message === "Invalid password") {
+    } else if (message === "Invalid password") {
       showToastErrorMessage("Invalid password");
-    } 
-    else {
+    } else {
       showToastErrorMessage("Login failed. Please try again.");
     }
-
   } finally {
     setLoading(false);
   }
 };
+
 
   const addNewAddress = async (newAddress: AddressType) => {
     try {
@@ -165,27 +162,24 @@ export const UserProvider = ({ children }: ProviderPropsType) => {
     }
   };
 
-  const userSignOutHandler = async () => {
+  
+const userSignOutHandler = () => {
   try {
-    const { data, status } = await axiosPrivate.get('logout');
+    clearPersist();
+    setSignedIn(false);
+    setAccessToken(null);
 
-    if (status === 200) {
-      showToastSuccessMessage("Signed out successfully");
+    localStorage.removeItem("user");
+    setUserInfo(null);
 
-      clearPersist();
-      setSignedIn(false);
-      localStorage.removeItem("user");
-
-      setUserInfo(null);
-      setAccessToken(null);
-
-      navigate('/');
-    }
+    showToastSuccessMessage("Signed out successfully");
+    navigate("/", { replace: true });
   } catch (error) {
     console.error("Sign out failed:", error);
     showToastErrorMessage("Failed to sign out");
   }
 };
+
 
   const value = {
     userSignInHandler,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "./contexts/user.context";
 import HomePageBody from "./HomePageBody";
@@ -29,45 +29,33 @@ const OrderItem = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ 
+useEffect(() => {
+  if (!userInfo) {
+    navigate("/signin", { replace: true });
+    return;
+  }
 
-    if (!userInfo) {
-      navigate("/signin", { replace: true });
-      return;
-    }
+  if (!orderId) {
+    navigate("/orders");
+    return;
+  }
 
-    if (!orderId) {
-      navigate("/orders");
-      return;
-    }
+  const fetchOrderItems = async () => {
+    try {
+      const [itemsResponse, productsResponse] = await Promise.all([
+        api.get("/order-items", {
+          params: {
+            orderId: orderId,
+          },
+        }),
 
-    const fetchOrderItems = async () => {
+        api.get("/products"),
+      ]);
 
-      try {
-
-        const [itemsResponse, productsResponse] =
-          await Promise.all([
-
-            axios.get(
-              "http://localhost:8080/order-items",
-              {
-                params: {
-                  orderId: orderId,
-                },
-              }
-            ),
-
-            axios.get(
-              "http://localhost:8080/products"
-            ),
-
-          ]);
-
-        setOrderItems(itemsResponse.data);
-        setProducts(productsResponse.data);
-
-      } catch (error) {
-
+      setOrderItems(itemsResponse.data);
+      setProducts(productsResponse.data);
+    } catch (error) {
         console.error(
           "Failed to fetch order items:",
           error

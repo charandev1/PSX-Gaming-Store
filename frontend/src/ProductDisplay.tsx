@@ -1,7 +1,7 @@
 
 import styles from "./ProductDisplay.module.css";
 import { FaRegHeart, FaHeart, FaShoppingCart } from "react-icons/fa";
-import axios from "axios";
+import api from "./api";
 import { useEffect, useState } from "react";
 import { useUserContext } from "./contexts/user.context";
 import { useNavigate } from "react-router-dom";
@@ -33,65 +33,64 @@ const ProductInfo = ({
 
   const [cartIds, setCartIds] = useState<number[]>([]);
 
-  useEffect(() => {
-    if (!userInfo) {
-      setCartIds([]);
-      return;
-    }
+  
+useEffect(() => {
+  if (!userInfo) {
+    setCartIds([]);
+    return;
+  }
 
-   axios
-  .get("http://localhost:8080/cartlist", {
-    params: { userId: userInfo.id },
-  })
-  .then((res) => {
+  api
+    .get("/cartlist", {
+      params: { userId: userInfo.id },
+    })
+    .then((res) => {
+      const ids = res.data.map(
+        (item: { productId: number; quantity: number }) =>
+          item.productId
+      );
+
+      setCartIds(ids);
+    })
+    .catch((error) => {
+      console.error("Failed to fetch cart items", error);
+      setCartIds([]);
+    });
+}, [userInfo]);
+
+const addToCart = async (productId: number) => {
+  if (!userInfo) {
+    navigate("/signin");
+    return;
+  }
+
+  try {
+    await api.post(
+      `/cartlist/${productId}`,
+      null,
+      {
+        params: { userId: userInfo.id },
+      }
+    );
+
+    const res = await api.get("/cartlist", {
+      params: { userId: userInfo.id },
+    });
+
     const ids = res.data.map(
       (item: { productId: number; quantity: number }) =>
         item.productId
     );
 
     setCartIds(ids);
-  })
-      .catch((error) => {
-        console.error("Failed to fetch cart items", error);
-        setCartIds([]);
-      });
-  }, [userInfo]);
 
-  const addToCart = async (productId: number) => {
-    if (!userInfo) {
-      navigate("/signin");
-      return;
-    }
+    toast.success("Added to cart");
+  } catch (error) {
+    console.error("Failed to add to cart", error);
+    toast.error("Failed to add to cart");
+  }
+};
 
-    try {
-      await axios.post(
-        `http://localhost:8080/cartlist/${productId}`,
-        null,
-        {
-          params: { userId: userInfo.id },
-        }
-      );
-
-      const res = await axios.get(
-        "http://localhost:8080/cartlist",
-        {
-          params: { userId: userInfo.id },
-        }
-      );
-
-      const ids = res.data.map(
-  (item: { productId: number; quantity: number }) =>
-    item.productId
-);
-
-setCartIds(ids);
-
-      toast.success("Added to cart");
-    } catch (error) {
-      console.error("Failed to add to cart", error);
-      toast.error("Failed to add to cart");
-    }
-  };
 
   const isInCart = cartIds.includes(product.id);
 

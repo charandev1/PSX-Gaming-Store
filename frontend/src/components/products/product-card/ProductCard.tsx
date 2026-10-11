@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import ProductType from 'types/ProductType';
+import { ProductType } from 'types/ProductType';
 import WishlistButton from 'components/wishlist-button/WishlistButton.component';
 
 import styles from './ProductCard.styles.module.css';

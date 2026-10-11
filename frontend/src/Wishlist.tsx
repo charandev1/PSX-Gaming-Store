@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import api from "./api";
 import { FaHeart } from "react-icons/fa";
 import styles from "./WishlistBody.module.css";
 import { useUserContext } from "./contexts/user.context";
@@ -27,58 +28,55 @@ function WishList() {
  const { userInfo } = useUserContext();
 const navigate = useNavigate();
 
-  useEffect(() => {
+ 
+useEffect(() => {
   if (!userInfo) {
     navigate("/signin", { replace: true });
     return;
   }
 
-  axios
-    .get("http://localhost:8080/wishlist", {
+  api
+    .get("/wishlist", {
       params: { userId: userInfo.id },
     })
     .then(res => setWishlistedIds(res.data));
 
-  axios
-    .get("http://localhost:8080/products")
+  api
+    .get("/products")
     .then(res => setProducts(res.data));
 }, [userInfo, navigate]);
 
 const removeFromWishlist = async (productId: number) => {
-
   if (!userInfo) {
     navigate("/signin");
     return;
   }
 
   try {
-    await axios.post(
-      `http://localhost:8080/wishlist/${productId}`,
+    await api.post(
+      `/wishlist/${productId}`,
       null,
       { params: { userId: userInfo.id } }
     );
 
-    const res = await axios.get(
-      "http://localhost:8080/wishlist",
-      { params: { userId: userInfo.id } }
-    );
+    const res = await api.get("/wishlist", {
+      params: { userId: userInfo.id },
+    });
 
     setWishlistedIds(res.data);
 
     toast.info("Removed from wishlist");
-
   } catch (error) {
     console.error("Failed to remove from wishlist", error);
-
     toast.error("Failed to remove from wishlist");
   }
 };
 
-  const wishlistedProducts = products.filter(p =>
-    wishlistedIds.includes(p.id)
-  );
+const wishlistedProducts = products.filter(p =>
+  wishlistedIds.includes(p.id)
+);
 
- if (wishlistedProducts.length === 0) {
+if (wishlistedProducts.length === 0) {
   return (
     <>
       <HomePageBody />
@@ -89,6 +87,7 @@ const removeFromWishlist = async (productId: number) => {
     </>
   );
 }
+
 
  return (
   <>

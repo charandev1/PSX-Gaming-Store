@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "./contexts/user.context";
 import HomePageBody from "./HomePageBody";
@@ -39,64 +39,74 @@ const Orders = () => {
 const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/signin", { replace: true });
-      return;
-    }
+  
 
-    const fetchOrders = async () => {
-  try {
-    const [ordersResponse, productsResponse] = await Promise.all([
-      axios.get("http://localhost:8080/order", {
-        params: {
-          userId: userInfo.id,
-        },
-      }),
-
-      axios.get("http://localhost:8080/products"),
-    ]);
-
-    setOrders(ordersResponse.data);
-    setProducts(productsResponse.data);
-
-    const itemsMap: Record<number, OrderItem[]> = {};
-
-    await Promise.all(
-      ordersResponse.data.map(async (order: Order) => {
-        try {
-          const itemResponse = await axios.get(
-            "http://localhost:8080/order-items",
-            {
-              params: {
-                orderId: order.id,
-              },
-            }
-          );
-
-          itemsMap[order.id] = itemResponse.data;
-        } catch (error) {
-          console.error(
-            `Failed to fetch items for order ${order.id}:`,
-            error
-          );
-
-          itemsMap[order.id] = [];
-        }
-      })
-    );
-
-    setOrderItems(itemsMap);
-
-  } catch (error) {
-    console.error("Failed to fetch orders:", error);
-  } finally {
-    setLoading(false);
+useEffect(() => {
+  if (!userInfo) {
+    navigate("/signin", { replace: true });
+    return;
   }
-};
 
-    fetchOrders();
-  }, [userInfo, navigate]);
+  let cancelled = false;
+
+  const fetchOrders = async () => {
+    setLoading(true);
+
+    try {
+      const [ordersResponse, productsResponse] = await Promise.all([
+        api.get("/order", {
+          params: { userId: userInfo.id },
+        }),
+        api.get("/products"),
+      ]);
+
+      if (cancelled) return;
+
+      const fetchedOrders: Order[] = ordersResponse.data;
+      setOrders(fetchedOrders);
+      setProducts(productsResponse.data);
+
+      const itemsMap: Record<number, OrderItem[]> = {};
+
+      await Promise.all(
+        fetchedOrders.map(async (order) => {
+          try {
+            const itemResponse = await api.get("/order-items", {
+              params: { orderId: order.id },
+            });
+
+            itemsMap[order.id] = itemResponse.data;
+          } catch (error) {
+            console.error(
+              `Failed to fetch items for order ${order.id}:`,
+              error
+            );
+
+            itemsMap[order.id] = [];
+          }
+        })
+      );
+
+      if (!cancelled) {
+        setOrderItems(itemsMap);
+      }
+    } catch (error) {
+      console.error("Failed to fetch orders:", error);
+    } finally {
+      if (!cancelled) {
+        setLoading(false);
+      }
+    }
+  };
+
+  fetchOrders();
+
+  return () => {
+    cancelled = true;
+  };
+}, [userInfo, navigate]);
+
+
 
   if (loading) {
     return (

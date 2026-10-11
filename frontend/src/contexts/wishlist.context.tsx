@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import ProviderPropsType from '../types/ProviderPropsType';
 import { useAuthContext } from './auth.context';
 import { handleError } from 'utils/displayError';
-import ProductType from 'types/ProductType';
+import { ProductType } from 'types/ProductType';
 
 import { showToastSuccessMessage } from 'utils/toastMessage';
 

@@ -1,4 +1,4 @@
-import ProductType from 'types/ProductType';
+import { ProductType } from 'types/ProductType';
 import WishlistButton from 'components/wishlist-button/WishlistButton.component';
 import CartButton from 'components/cart-button/CartButton.component';
 

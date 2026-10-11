@@ -4,7 +4,7 @@ import ProviderPropsType from '../types/ProviderPropsType';
 import { useAuthContext } from './auth.context';
 import { showToastSuccessMessage } from 'utils/toastMessage';
 import { handleError } from 'utils/displayError';
-import ProductType from 'types/ProductType';
+import { ProductType } from 'types/ProductType';
 
 export type CartListType = { _id: string; product: ProductType; count: number };
 

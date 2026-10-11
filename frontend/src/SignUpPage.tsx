@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
+import api from "./api";
 import FormInput from './components/formInput/FormInput.component';
 import { showToastInfoMessage, showToastSuccessMessage, showToastErrorMessage } from './utils/toastMessage';
 import signUpFormValidation from './utils/signUpFormValidation';
@@ -104,15 +103,15 @@ const SignUp = () => {
     };
 
     try {
-  const { data, status } = await axios.post(
-    "http://localhost:8080/user/register",
-    {
-     firstName: firstName.value,
-lastName: lastName.value,
-email: email.value,
-password: password.value
-    }
-  );
+  const { status } = await api.post(
+  "/user/register",
+  {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    password: password.value,
+  }
+);
 
   if (status === 201) {
     showToastInfoMessage(`Redirecting to SignIn page`);

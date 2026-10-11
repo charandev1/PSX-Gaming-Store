@@ -1,5 +1,5 @@
 import styles from './HomePage.module.css';
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useUserContext } from './contexts/user.context';
 import { useWishlist } from "./useWishlist";
-import axios from "axios";
+import api from "./api";
 import psxLogo from "./assets/psxlogo.png";
 // import { useFilterContext } from './contexts/filter.context';
 // import { createAction } from './utils/reducer/createAction';
@@ -32,14 +32,15 @@ const handleDropdown = (_e: React.MouseEvent, open: boolean) => {
   });
 };
 
+
 useEffect(() => {
   if (!userInfo) {
     setCartIds([]);
     return;
   }
 
-  axios
-    .get("http://localhost:8080/cartlist", {
+  api
+    .get("/cartlist", {
       params: { userId: userInfo.id },
     })
     .then(res => setCartIds(res.data))
@@ -48,6 +49,7 @@ useEffect(() => {
       setCartIds([]);
     });
 }, [userInfo]);
+
 const handleLogout = () => {
   userSignOutHandler();
 };

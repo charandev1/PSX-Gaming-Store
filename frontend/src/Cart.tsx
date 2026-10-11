@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { FaTrash } from "react-icons/fa";
 import styles from "./CartBody.module.css";
 import { useUserContext } from "./contexts/user.context";
@@ -46,30 +46,32 @@ const [addresses, setAddresses] = useState<Address[]>([]);
     return;
   }
 
-  axios
-  .get("http://localhost:8080/cartlist", {
+ api
+  .get("/cartlist", {
     params: { userId: userInfo.id },
   })
   .then(res => setCartItems(res.data));
-  axios
-    .get("http://localhost:8080/products")
-    .then(res => setProducts(res.data));
+
+api
+  .get("/products")
+  .then(res => setProducts(res.data));
+
 }, [userInfo, navigate]);
  useEffect(() => {
   if (!userInfo) return;
 
-  axios
-    .get("http://localhost:8080/address", {
-      params: {
-        userId: userInfo.id,
-      },
-    })
-    .then((res) => {
-      setAddresses(res.data);
-    })
-    .catch((error) => {
-      console.error("Failed to fetch addresses:", error);
-    });
+ api
+  .get("/address", {
+    params: {
+      userId: userInfo.id,
+    },
+  })
+  .then((res) => {
+    setAddresses(res.data);
+  })
+  .catch((error) => {
+    console.error("Failed to fetch addresses:", error);
+  });
 }, [userInfo]);
 const selectedAddressId = Number(
   localStorage.getItem("selectedAddressId")
@@ -86,20 +88,21 @@ const removeFromCart = async (productId: number) => {
   }
 
   try {
-    await axios.post(
-      `http://localhost:8080/cartlist/${productId}`,
-      null,
-      { params: { userId: userInfo.id } }
-    );
+   await api.post(
+  `/cartlist/${productId}`,
+  null,
+  { params: { userId: userInfo.id } }
+);
 
-    const res = await axios.get(
-      "http://localhost:8080/cartlist",
-      { params: { userId: userInfo.id } }
-    );
+const res = await api.get(
+  "/cartlist",
+  { params: { userId: userInfo.id } }
+);
 
-   setCartItems(res.data);
-    toast.success("Removed from cart");
-  } catch (e) {
+setCartItems(res.data);
+toast.success("Removed from cart");
+}
+ catch (e) {
     console.error(e);
     toast.error("Failed to remove from cart");
   }
@@ -116,27 +119,24 @@ const updateQuantity = async (
 
   try {
 
-    await axios.put(
-      `http://localhost:8080/cartlist/${productId}/quantity`,
-      null,
-      {
-        params: {
-          userId: userInfo.id,
-          quantity: quantity,
-        },
-      }
-    );
+   await api.put(
+  `/cartlist/${productId}/quantity`,
+  null,
+  {
+    params: {
+      userId: userInfo.id,
+      quantity: quantity,
+    },
+  }
+);
 
-    const res = await axios.get(
-      "http://localhost:8080/cartlist",
-      {
-        params: {
-          userId: userInfo.id,
-        },
-      }
-    );
+const res = await api.get("/cartlist", {
+  params: {
+    userId: userInfo.id,
+  },
+});
 
-    setCartItems(res.data);
+setCartItems(res.data);
 
   } catch (error) {
 

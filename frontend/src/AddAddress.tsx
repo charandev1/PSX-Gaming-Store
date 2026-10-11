@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { useUserContext } from "./contexts/user.context";
 import styles from "./AddAddress.module.css";
 
@@ -75,30 +75,30 @@ const AddAddress = ({
 
       if (editMode && initialValues) {
 
-        // EDIT EXISTING ADDRESS
-        await axios.put(
-          `http://localhost:8080/address/${initialValues.id}`,
-          addressData,
-          {
-            params: {
-              userId: userInfo.id,
-            },
-          }
-        );
+  // EDIT EXISTING ADDRESS
+  await api.put(
+    `/address/${initialValues.id}`,
+    addressData,
+    {
+      params: {
+        userId: userInfo.id,
+      },
+    }
+  );
 
-      } else {
+} else {
 
-        // ADD NEW ADDRESS
-        await axios.post(
-          "http://localhost:8080/address",
-          addressData,
-          {
-            params: {
-              userId: userInfo.id,
-            },
-          }
-        );
-      }
+  // ADD NEW ADDRESS
+  await api.post(
+    "/address",
+    addressData,
+    {
+      params: {
+        userId: userInfo.id,
+      },
+    }
+  );
+}
 
       onAddressAdded();
       onClose();

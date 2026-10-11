@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "./contexts/user.context";
 import HomePageBody from "./HomePageBody";
@@ -36,7 +36,6 @@ const Checkout = () => {
   const { userInfo } = useUserContext();
   const navigate = useNavigate();
  const [products, setProducts] = useState<Product[]>([]);
-const [cartIds, setCartIds] = useState<number[]>([]);
 const [addresses, setAddresses] = useState<Address[]>([]);
 const [loading, setLoading] = useState(true);
 const [selectedCartIds, setSelectedCartIds] = useState<number[]>([]);
@@ -60,41 +59,41 @@ useEffect(() => {
     }
     
 
-    const fetchData = async () => {
-      try {
-        const [cartResponse, productsResponse, addressResponse] =
-          await Promise.all([
-            axios.get("http://localhost:8080/cartlist", {
-              params: {
-                userId: userInfo.id,
-              },
-            }),
+const fetchData = async () => {
+  try {
+    const [cartResponse, productsResponse, addressResponse] =
+      await Promise.all([
+        api.get("/cartlist", {
+          params: {
+            userId: userInfo.id,
+          },
+        }),
 
-            axios.get("http://localhost:8080/products"),
+        api.get("/products"),
 
-            axios.get("http://localhost:8080/address", {
-              params: {
-                userId: userInfo.id,
-              },
-            }),
-          ]);
+        api.get("/address", {
+          params: {
+            userId: userInfo.id,
+          },
+        }),
+      ]);
 
-setCartItems(cartResponse.data);
+    setCartItems(cartResponse.data);
 
-setSelectedCartIds(
-  cartResponse.data.map(
-    (item: CartItem) => item.productId
-  )
-);
+    setSelectedCartIds(
+      cartResponse.data.map(
+        (item: CartItem) => item.productId
+      )
+    );
 
-setProducts(productsResponse.data);
-setAddresses(addressResponse.data);
-      } catch (error) {
-        console.error("Failed to load checkout:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setProducts(productsResponse.data);
+    setAddresses(addressResponse.data);
+  } catch (error) {
+    console.error("Failed to load checkout:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
     fetchData();
   }, [userInfo, navigate]);
@@ -189,16 +188,15 @@ const handlePayment = async () => {
 
   try {
     // 1️⃣ Create Razorpay order through our Spring Boot backend
-    const response = await axios.post(
-      "http://localhost:8080/payment/create-order",
-      null,
-      {
-        params: {
-          amount: cartTotal,
-        },
-      }
-    );
-
+    const response = await api.post(
+  "/payment/create-order",
+  null,
+  {
+    params: {
+      amount: cartTotal,
+    },
+  }
+);
     const order = response.data;
 
     // 2️⃣ Razorpay checkout configuration
@@ -224,25 +222,25 @@ const handlePayment = async () => {
       const selectedItems = cartItems.filter(
   item => selectedCartIds.includes(item.productId)
 );
-    const orderResponse = await axios.post(
-      "http://localhost:8080/order",
-      null,
-      {
-        params: {
-          userId: userInfo.id,
-          addressId: selectedAddress.id,
-          productIds: selectedCartIds,
-          quantities: selectedItems.map(item => item.quantity),
-          totalAmount: cartTotal,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-        },
-      }
-    );
-     await Promise.all(
+    const orderResponse = await api.post(
+  "/order",
+  null,
+  {
+    params: {
+      userId: userInfo.id,
+      addressId: selectedAddress.id,
+      productIds: selectedCartIds,
+      quantities: selectedItems.map(item => item.quantity),
+      totalAmount: cartTotal,
+      razorpayOrderId: response.razorpay_order_id,
+      razorpayPaymentId: response.razorpay_payment_id,
+    },
+  }
+);
+    await Promise.all(
   selectedCartIds.map((productId) =>
-    axios.post(
-      `http://localhost:8080/cartlist/${productId}`,
+    api.post(
+      `/cartlist/${productId}`,
       null,
       {
         params: {

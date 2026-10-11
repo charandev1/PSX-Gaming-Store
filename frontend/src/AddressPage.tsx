@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaLocationArrow, FaEdit, FaTrash } from "react-icons/fa";
-import axios from "axios";
+import api from "./api";
 
 import styles from "./AddressPage.module.css";
 import { useUserContext } from "./contexts/user.context";
@@ -43,23 +43,23 @@ const [selectedAddress, setSelectedAddress] =
       return;
     }
 
-    axios
-      .get("http://localhost:8080/address", {
-        params: {
-          userId: userInfo.id,
-        },
-      })
-      .then((res) => {
-        setAddresses(res.data);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch addresses:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    api
+  .get("/address", {
+    params: {
+      userId: userInfo.id,
+    },
+  })
+  .then((res) => {
+    setAddresses(res.data);
+  })
+  .catch((error) => {
+    console.error("Failed to fetch addresses:", error);
+  })
+  .finally(() => {
+    setLoading(false);
+  });
 
-  }, [userInfo]);
+}, [userInfo]);
 
   const handleDeleteAddress = async (addressId: number) => {
   if (!userInfo) return;
@@ -71,14 +71,11 @@ const [selectedAddress, setSelectedAddress] =
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(
-      `http://localhost:8080/address/${addressId}`,
-      {
-        params: {
-          userId: userInfo.id,
-        },
-      }
-    );
+   await api.delete(`/address/${addressId}`, {
+  params: {
+    userId: userInfo.id,
+  },
+});
 
     // Remove the deleted address from the UI
     setAddresses((prev) =>
@@ -117,18 +114,18 @@ const handleSelectAddress = (addressId: number) => {
     onAddressAdded={() => {
       if (!userInfo) return;
 
-      axios
-        .get("http://localhost:8080/address", {
-          params: {
-            userId: userInfo.id,
-          },
-        })
-        .then((res) => {
-          setAddresses(res.data);
-        })
-        .catch((error) => {
-          console.error("Failed to refresh addresses:", error);
-        });
+     api
+  .get("/address", {
+    params: {
+      userId: userInfo.id,
+    },
+  })
+  .then((res) => {
+    setAddresses(res.data);
+  })
+  .catch((error) => {
+    console.error("Failed to refresh addresses:", error);
+  });
     }}
   />
 )}{isEditAddressOpen && selectedAddress && (
@@ -143,21 +140,21 @@ const handleSelectAddress = (addressId: number) => {
 
       if (!userInfo) return;
 
-      axios
-        .get("http://localhost:8080/address", {
-          params: {
-            userId: userInfo.id,
-          },
-        })
-        .then((res) => {
-          setAddresses(res.data);
-        })
-        .catch((error) => {
-          console.error(
-            "Failed to refresh addresses:",
-            error
-          );
-        });
+      api
+  .get("/address", {
+    params: {
+      userId: userInfo.id,
+    },
+  })
+  .then((res) => {
+    setAddresses(res.data);
+  })
+  .catch((error) => {
+    console.error(
+      "Failed to refresh addresses:",
+      error
+    );
+  });
     }}
   />
 )}
